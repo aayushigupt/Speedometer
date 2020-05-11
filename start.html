@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+       <meta charset="utf-8">
+        <link rel="stylesheet" href="start.css">
+        
+    </head>
+    <body>
+        <div class="background">
+        <div class="gauge">
+            <div class="gauge_body">
+                <div class="gauge_fill">
+
+            </div>
+            <div class="gauge_cover"></div>
+        </div>
+        </div>
+    </div>
+        <!-- <form action="start.php" method="GET">
+            Enter Speed: <input type="text">
+            <input type="submit">
+        </form> -->
+        <script>
+            const gaugeElement = document.querySelector(".gauge");
+
+            function setGaugeValue(gauge , value)
+            {
+                if(value < 0 || value > 1){
+                    return;
+                }
+                gauge.querySelector(".gauge_fill").style.transform =`rotate(${value/2}turn)`;
+                gauge.querySelector(".gauge_cover").textContent =`${Math.round(value *100)}% `;
+            }
+            
+            setGaugeValue(gaugeElement, 0.3);
+            </script>
+        <!-- <form method="GET">
+            Enter Speed: <input type="text">
+            <br> <input type="submit">
+        </form> -->
+
+    </body>
+</html>
