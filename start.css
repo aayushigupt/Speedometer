@@ -1,3 +1,5 @@
+
+
 .gauge{
     width: 100%;
     max-width: 300px;
@@ -40,7 +42,6 @@
     top: 25%;
     left: 50%;
     transform: translateX(-50%);
-
     display: flex;
     align-items: center;
     justify-content: center;

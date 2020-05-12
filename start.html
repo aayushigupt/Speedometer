@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-       <meta charset="utf-8">
-        <link rel="stylesheet" href="start.css">
-        
+    <title></title>
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+   <meta charset="utf-8">
+    <link rel="stylesheet" href="start.css">
+    <script type="text/javascript" src="jquery.js"></script>        
     </head>
     <body>
-        <div class="background">
-        <div class="gauge">
+    <div class="background">
+        <div class="gauge" id="gauge">
             <div class="gauge_body">
                 <div class="gauge_fill">
 
@@ -18,28 +18,43 @@
         </div>
         </div>
     </div>
-        <!-- <form action="start.php" method="GET">
-            Enter Speed: <input type="text">
-            <input type="submit">
-        </form> -->
-        <script>
-            const gaugeElement = document.querySelector(".gauge");
+    <script>
+        const gaugeElement = document.querySelector(".gauge");
 
-            function setGaugeValue(gauge , value)
-            {
-                if(value < 0 || value > 1){
-                    return;
-                }
-                gauge.querySelector(".gauge_fill").style.transform =`rotate(${value/2}turn)`;
-                gauge.querySelector(".gauge_cover").textContent =`${Math.round(value *100)}% `;
+        function handleSubmit(gauge , value){
+            setGaugeValue(gauge, value);
+            gauge.querySelector(".gauge_cover").textContent = update_users_count(value);
+        }
+
+        function setGaugeValue(gauge , value)
+        {
+            value = value / 100;
+            if(value < 0 || value > 1){
+                return;
             }
-            
-            setGaugeValue(gaugeElement, 0.3);
-            </script>
-        <!-- <form method="GET">
-            Enter Speed: <input type="text">
-            <br> <input type="submit">
-        </form> -->
+            gauge.querySelector(".gauge_fill").style.transform =`rotate(${value/2}turn)`;
+        }
+
+        function update_users_count(val){
+            $('.gauge_cover').animate({
+                counter: val
+            }, {
+                duration: 300,
+                easing: 'swing',
+                step: function(now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        };
+        
+        setGaugeValue(gaugeElement, 0);
+        </script>
+    <center>
+        <form method="GET">
+            Enter Speed: <input placeholder="In between 0 to 100" id="speed_input" type="text">
+            <br> <button type="button" onclick="handleSubmit(document.getElementById('gauge'), document.getElementById('speed_input').value)">Submit</button>
+        </form>  ,  
+    </center>
 
     </body>
 </html>
